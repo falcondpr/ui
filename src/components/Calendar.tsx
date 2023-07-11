@@ -33,7 +33,7 @@ let colStartClasses = [
 
 const Calendar = () => {
   const today = startOfToday();
-  const [selectedDay, setSelectedDay] = useState(today);
+  // const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(
     format(today, "MMM-yyyy")
   );
