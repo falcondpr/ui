@@ -1,4 +1,5 @@
 import Calendar from "./components/Calendar";
+import { Button } from "./ui";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
 
       <div>
         <h3 className="font-medium mb-4 text-2xl">Buttons</h3>
+        <Button>Hello</Button>
       </div>
     </div>
   );

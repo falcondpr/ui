@@ -11,6 +11,7 @@ import {
   isToday,
   parse,
   startOfToday,
+  startOfWeek,
 } from "date-fns";
 import {
   FaAngleLeft,
@@ -46,7 +47,7 @@ const Calendar = () => {
   );
 
   let days = eachDayOfInterval({
-    start: firstDayCurrentMonth,
+    start: startOfWeek(firstDayCurrentMonth),
     end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
   });
 
@@ -88,7 +89,7 @@ const Calendar = () => {
           </button>
         </div>
         <div className="font-medium text text-gray-500">
-          {format(firstDayCurrentMonth, "MMMM yyyy")}
+          {format(firstDayCurrentMonth, "MMM yyyy")}
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -133,11 +134,11 @@ const Calendar = () => {
                   "text-red-500",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  isSameMonth(day, today) &&
+                  isSameMonth(day, firstDayCurrentMonth) &&
                   "text-gray-900",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  !isSameMonth(day, today) &&
+                  !isSameMonth(day, firstDayCurrentMonth) &&
                   "text-gray-400",
                 isEqual(day, selectedDay) &&
                   isToday(day) &&
