@@ -8,7 +8,12 @@ import {
   parse,
   startOfToday,
 } from "date-fns";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import {
+  FaAngleLeft,
+  FaAngleRight,
+  FaAnglesLeft,
+  FaAnglesRight,
+} from "react-icons/fa6";
 
 import { Text } from "../ui";
 
@@ -48,30 +53,53 @@ const Calendar = () => {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
+  const previousYear = () => {
+    let firstDayNextMonth = add(firstDayCurrentMonth, { years: -1 });
+    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
+  };
+
   const nextMonth = () => {
     let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
-  
+
+  const nextYear = () => {
+    let firstDayNextMonth = add(firstDayCurrentMonth, { years: 1 });
+    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
+  };
+
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between">
-        <div className="font-semibold text-xl text-gray-500">
-          {format(firstDayCurrentMonth, "MMMM yyyy")}
-        </div>
-
-        <div className="flex items-center gap-2">
+      <div className="mb-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={previousYear}
+            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
+          >
+            <FaAnglesLeft />
+          </button>
           <button
             onClick={previousMonth}
-            className="text-gray-900 bg-gray-100 rounded-sm p-3"
+            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
           >
             <FaAngleLeft />
           </button>
+        </div>
+        <div className="font-medium text text-gray-500">
+          {format(firstDayCurrentMonth, "MMMM yyyy")}
+        </div>
+        <div className="flex items-center gap-3">
           <button
             onClick={nextMonth}
-            className="text-gray-900 bg-gray-100 rounded-sm p-3"
+            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
           >
             <FaAngleRight />
+          </button>
+          <button
+            onClick={nextYear}
+            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
+          >
+            <FaAnglesRight />
           </button>
         </div>
       </div>
