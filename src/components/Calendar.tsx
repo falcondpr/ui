@@ -3,8 +3,12 @@ import {
   add,
   eachDayOfInterval,
   endOfMonth,
+  endOfWeek,
   format,
   getDay,
+  isEqual,
+  isSameMonth,
+  isToday,
   parse,
   startOfToday,
 } from "date-fns";
@@ -14,8 +18,6 @@ import {
   FaAnglesLeft,
   FaAnglesRight,
 } from "react-icons/fa6";
-
-import { Text } from "../ui";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -33,7 +35,7 @@ let colStartClasses = [
 
 const Calendar = () => {
   const today = startOfToday();
-  // const [selectedDay, setSelectedDay] = useState(today);
+  const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(
     format(today, "MMM-yyyy")
   );
@@ -45,7 +47,7 @@ const Calendar = () => {
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
-    end: endOfMonth(firstDayCurrentMonth),
+    end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
   });
 
   const previousMonth = () => {
@@ -69,7 +71,7 @@ const Calendar = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-sm">
       <div className="mb-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
@@ -113,16 +115,44 @@ const Calendar = () => {
         <p className="text-center font-bold mb-3">V</p>
         <p className="text-center font-bold mb-3">S</p>
       </div>
-      <div className="grid grid-cols-7 gap-x-2 gap-y-3">
+      <div className="grid grid-cols-7 gap-x-2 gap-y-1">
         {days.map((day, index) => (
           <div
+            onClick={() => setSelectedDay(day)}
             key={day.toString()}
             className={classNames(
               index === 0 && colStartClasses[getDay(day)],
-              "py-1.5"
+              "cursor-pointer"
             )}
           >
-            <Text>{format(day, "d")}</Text>
+            <p
+              className={classNames(
+                isEqual(day, selectedDay) && "text-white",
+                !isEqual(day, selectedDay) &&
+                  isToday(day) &&
+                  "text-red-500",
+                !isEqual(day, selectedDay) &&
+                  !isToday(day) &&
+                  isSameMonth(day, today) &&
+                  "text-gray-900",
+                !isEqual(day, selectedDay) &&
+                  !isToday(day) &&
+                  !isSameMonth(day, today) &&
+                  "text-gray-400",
+                isEqual(day, selectedDay) &&
+                  isToday(day) &&
+                  "bg-red-500",
+                isEqual(day, selectedDay) &&
+                  !isToday(day) &&
+                  "bg-gray-900",
+                !isEqual(day, selectedDay) && "hover:bg-gray-200",
+                (isEqual(day, selectedDay) || isToday(day)) &&
+                  "font-semibold",
+                "text-center w-full py-2 rounded-full grid place-items-center"
+              )}
+            >
+              {format(day, "d")}
+            </p>
           </div>
         ))}
       </div>
