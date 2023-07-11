@@ -9,7 +9,7 @@ function App() {
         <Calendar />
       </div>
 
-      <div>
+      <div className="max-w-sm">
         <h3 className="font-medium mb-4 text-2xl">Buttons</h3>
         <Button>Hello</Button>
       </div>
