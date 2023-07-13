@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({ show, setShow, children }) => {
         }}
         className={`${
           show ? "opacity-100" : "opacity-0"
-        } shadow-lg border rounded-tl-lg py-5 rounded-tr-lg transition-all border-gray-300 absolute left-[6px] w-[calc(100vw_-_12px)] h-[300px] bottom-0 bg-white z-20`}
+        } shadow-lg border rounded-tl-lg py-5 rounded-tr-lg transition-all border-gray-300 fixed left-[6px] w-[calc(100vw_-_12px)] h-[300px] bottom-0 bg-white z-20`}
       >
         {/* header */}
         <div className="pb-3 border-b px-5 border-gray-300">
