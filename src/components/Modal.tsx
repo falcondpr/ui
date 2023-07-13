@@ -39,12 +39,14 @@ const Modal: React.FC<ModalProps> = ({ show, setShow, children }) => {
             <p className="text-center flex-1 text-lg font-bold">
               Contacts
             </p>
-            <button
-              onClick={() => setShow(false)}
-              className="text-blue-500 flex-1 text-right"
-            >
-              Cancel
-            </button>
+            <div className="flex-1 flex justify-end">
+              <button
+                onClick={() => setShow(false)}
+                className="text-blue-500 text-right"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
 
