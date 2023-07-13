@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ModalProps {
   show: boolean;
@@ -6,7 +6,11 @@ interface ModalProps {
   setShow: (value: boolean) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, setShow, children }) => {
+const ModalBody: React.FC<ModalProps> = ({
+  show,
+  setShow,
+  children,
+}) => {
   return (
     <>
       <motion.div
@@ -29,7 +33,6 @@ const Modal: React.FC<ModalProps> = ({ show, setShow, children }) => {
           show ? "opacity-100" : "opacity-0"
         } shadow-lg rounded-tl-lg py-5 rounded-tr-lg transition-all fixed left-[6px] w-[calc(100vw_-_12px)] h-[300px] bottom-0 bg-white z-20`}
       >
-        {/* header */}
         <div className="pb-3 border-b px-5 border-gray-300">
           <p className="text-center text-gray-900 text-sm">
             Chose a contact to add to Favorites
@@ -50,10 +53,21 @@ const Modal: React.FC<ModalProps> = ({ show, setShow, children }) => {
           </div>
         </div>
 
-        {/* body */}
-        <div>{children}</div>
+        <div className="p-5">{children}</div>
       </motion.div>
     </>
+  );
+};
+
+const Modal = ({ show, setShow, children }: any) => {
+  return (
+    <AnimatePresence>
+      {show && (
+        <ModalBody show={show} setShow={setShow}>
+          {children}
+        </ModalBody>
+      )}
+    </AnimatePresence>
   );
 };
 

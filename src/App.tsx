@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 
 import Calendar from "./components/Calendar";
 import { Button } from "./ui";
@@ -27,13 +26,9 @@ function App() {
         <h3 className="font-medium mb-4 text-2xl">Modal</h3>
         <div className="flex flex-col gap-y-3">
           <Button onClick={() => setShow(true)}>Open Modal</Button>
-          <AnimatePresence>
-            {show && (
-              <Modal show={show} setShow={setShow}>
-                {/* body */}
-              </Modal>
-            )}
-          </AnimatePresence>
+          <Modal show={show} setShow={setShow}>
+            List of contacts
+          </Modal>
         </div>
       </div>
     </div>
