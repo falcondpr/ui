@@ -113,7 +113,7 @@ const Calendar = () => {
             key={day.toString()}
             className={classNames(
               (index === 0 && colStartClasses[getDay(day)]) || "",
-              "cursor-pointer"
+              "cursor-pointer relative"
             )}
           >
             <p
@@ -133,10 +133,10 @@ const Calendar = () => {
                   ? "text-gray-400"
                   : "",
                 isEqual(day, selectedDay) && isToday(day)
-                  ? "after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-neutral-800 text-white"
+                  ? "after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-neutral-800 text-white"
                   : "",
                 isEqual(day, selectedDay) && !isToday(day)
-                  ? "after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-[#FF3B30]"
+                  ? "after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-[#FF3B30]"
                   : "",
                 !isEqual(day, selectedDay) ? "hover:bg-gray-200" : "",
                 isEqual(day, selectedDay) || isToday(day)
