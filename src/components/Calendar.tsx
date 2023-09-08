@@ -20,11 +20,11 @@ import {
   FaAnglesRight,
 } from "react-icons/fa6";
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-let colStartClasses = [
+const colStartClasses = [
   "",
   "col-start-2",
   "col-start-3",
@@ -46,28 +46,34 @@ const Calendar = () => {
     new Date()
   );
 
-  let days = eachDayOfInterval({
+  const days = eachDayOfInterval({
     start: startOfWeek(firstDayCurrentMonth),
     end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
   });
 
   const previousMonth = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, {
+      months: -1,
+    });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
   const previousYear = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { years: -1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, {
+      years: -1,
+    });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
   const nextMonth = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, {
+      months: 1,
+    });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
   const nextYear = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { years: 1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, { years: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
@@ -122,33 +128,36 @@ const Calendar = () => {
             onClick={() => setSelectedDay(day)}
             key={day.toString()}
             className={classNames(
-              index === 0 && colStartClasses[getDay(day)],
+              (index === 0 && colStartClasses[getDay(day)]) || "",
               "cursor-pointer"
             )}
           >
             <p
               className={classNames(
-                isEqual(day, selectedDay) && "text-white",
-                !isEqual(day, selectedDay) &&
-                  isToday(day) &&
-                  "text-red-500",
-                !isEqual(day, selectedDay) &&
-                  !isToday(day) &&
-                  isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-900",
+                isEqual(day, selectedDay) ? "text-white" : "",
+                !isEqual(day, selectedDay) && isToday(day)
+                  ? "text-[#FF3B30]"
+                  : "",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  !isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-400",
-                isEqual(day, selectedDay) &&
-                  isToday(day) &&
-                  "bg-red-500",
-                isEqual(day, selectedDay) &&
+                  isSameMonth(day, firstDayCurrentMonth)
+                  ? "text-gray-900"
+                  : "",
+                !isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  "bg-gray-900",
-                !isEqual(day, selectedDay) && "hover:bg-gray-200",
-                (isEqual(day, selectedDay) || isToday(day)) &&
-                  "font-semibold",
+                  !isSameMonth(day, firstDayCurrentMonth)
+                  ? "text-gray-400"
+                  : "",
+                isEqual(day, selectedDay) && isToday(day)
+                  ? "text-[#FF3B30]"
+                  : "",
+                isEqual(day, selectedDay) && !isToday(day)
+                  ? "after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-[#FF3B30]"
+                  : "",
+                !isEqual(day, selectedDay) ? "hover:bg-gray-200" : "",
+                isEqual(day, selectedDay) || isToday(day)
+                  ? "font-semibold"
+                  : "",
                 "text-center w-full py-2 rounded-full grid place-items-center"
               )}
             >

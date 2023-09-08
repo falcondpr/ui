@@ -8,7 +8,7 @@ interface ButtonProps
 export default function Button({ children, ...rest }: ButtonProps) {
   return (
     <button
-      className="text-lg w-full h-14 bg-gray-900 rounded-md text-white"
+      className="text-lg w-max py-2 bg-white text-[#0a84ff] rounded-xl"
       {...rest}
     >
       {children}
