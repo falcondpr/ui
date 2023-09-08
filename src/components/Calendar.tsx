@@ -13,12 +13,7 @@ import {
   startOfToday,
   startOfWeek,
 } from "date-fns";
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaAnglesLeft,
-  FaAnglesRight,
-} from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -58,13 +53,6 @@ const Calendar = () => {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
-  const previousYear = () => {
-    const firstDayNextMonth = add(firstDayCurrentMonth, {
-      years: -1,
-    });
-    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
-  };
-
   const nextMonth = () => {
     const firstDayNextMonth = add(firstDayCurrentMonth, {
       months: 1,
@@ -72,56 +60,52 @@ const Calendar = () => {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
 
-  const nextYear = () => {
-    const firstDayNextMonth = add(firstDayCurrentMonth, { years: 1 });
-    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
-  };
-
   return (
     <div className="max-w-sm">
       <div className="mb-5 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={previousYear}
-            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
-          >
-            <FaAnglesLeft />
-          </button>
+        <p className="font-bold text-lg text text-neutral-900">
+          {format(firstDayCurrentMonth, "MMMM yyyy")}
+        </p>
+        <div className="flex items-center gap-2">
           <button
             onClick={previousMonth}
-            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
+            className="text-xl text-[#FF3B30] rounded-md p-2"
           >
             <FaAngleLeft />
           </button>
-        </div>
-        <div className="font-medium text text-gray-500">
-          {format(firstDayCurrentMonth, "MMM yyyy")}
-        </div>
-        <div className="flex items-center gap-3">
           <button
             onClick={nextMonth}
-            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
+            className="text-xl text-[#FF3B30] rounded-md p-2"
           >
             <FaAngleRight />
-          </button>
-          <button
-            onClick={nextYear}
-            className="border border-gray-300 text-sm text-gray-900 rounded-md shadow-sm p-3"
-          >
-            <FaAnglesRight />
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-x-2 gap-y-3">
-        <p className="text-center font-bold mb-3">D</p>
-        <p className="text-center font-bold mb-3">L</p>
-        <p className="text-center font-bold mb-3">M</p>
-        <p className="text-center font-bold mb-3">M</p>
-        <p className="text-center font-bold mb-3">J</p>
-        <p className="text-center font-bold mb-3">V</p>
-        <p className="text-center font-bold mb-3">S</p>
+      <div className="grid grid-cols-7 gap-x-2 gap-y-3 mb-2">
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          SUN
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          MON
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          TUE
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          WED
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          THU
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          FRI
+        </p>
+        <p className="text-[12px] text-neutral-400 text-center font-medium">
+          SAT
+        </p>
       </div>
+
       <div className="grid grid-cols-7 gap-x-2 gap-y-1">
         {days.map((day, index) => (
           <div
@@ -149,7 +133,7 @@ const Calendar = () => {
                   ? "text-gray-400"
                   : "",
                 isEqual(day, selectedDay) && isToday(day)
-                  ? "text-[#FF3B30]"
+                  ? "after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-neutral-800 text-white"
                   : "",
                 isEqual(day, selectedDay) && !isToday(day)
                   ? "after:w-10 after:-z-10 after:rounded-full after:h-10 after:absolute after:bg-[#FF3B30]"

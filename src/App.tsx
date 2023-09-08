@@ -20,7 +20,6 @@ function App() {
         <h3 className="font-medium mb-4 text-2xl">Buttons</h3>
         <div className="flex flex-col gap-y-3">
           <Button>Button Primary</Button>
-          {/* <Button>Button Secondary</Button> */}
         </div>
       </div>
 
@@ -31,6 +30,13 @@ function App() {
           <Modal show={show} setShow={setShow}>
             List of contacts
           </Modal>
+        </div>
+      </div>
+
+      <div className="max-w-sm">
+        <h3 className="font-medium mb-4 text-2xl">Alert</h3>
+        <div className="flex flex-col gap-y-3">
+          <Button onClick={() => setShow(true)}>Open Alert</Button>
         </div>
       </div>
 
